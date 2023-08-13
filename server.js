@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt-nodejs');
 const cors = require('cors');
 const knex = require('knex');
 
-const register = require('./controllers/register')
+import registerHandler from "./controllers/register.js";
 const signin = require('./controllers/signin')
 const profile = require('./controllers/profile')
 const image = require('./controllers/image')
@@ -11,11 +11,12 @@ const image = require('./controllers/image')
 const db = knex({
     client: 'pg',
     connection: {
-      host : '127.0.0.1',
+      connectionString : process.env.DATABASE_URL,
+      host : process.env.DATABASE_HOST,
       port : 5432,
-      user : 'postgres',
-      password : '1337tima',
-      database : 'smart-brain'
+      user : process.env.DATABASE_USER,
+      password : process.env.DATABASE_PW,
+      database : process.env.DATABASE_DB
     }
   });
 
